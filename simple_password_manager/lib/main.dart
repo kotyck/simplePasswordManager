@@ -50,6 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/master_password.json');
     await file.writeAsString(json.encode({'hash': _hashPassword(password)}));
+    String contents = await file.readAsString();
+    masterPasswordHash = json.decode(contents)['hash'];
   }
 
   //функция для аутентификации
@@ -57,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _loadMasterPassword();
     if (masterPasswordHash == null) {
       _showSetMasterPasswordDialog();
-    } 
+    }
     else {
       final inputPasswordHash = _hashPassword(_passwordController.text);
       if (inputPasswordHash == masterPasswordHash) {
