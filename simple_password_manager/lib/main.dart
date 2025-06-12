@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loadMasterPassword() async { 
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/master_password.json');
-   if (await file.exists()) {
+    if (await file.exists()) {
       String contents = await file.readAsString();
       masterPasswordHash = json.decode(contents)['hash'];
     }
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-//функия для хэширования паролей
+  //функия для хэширования паролей
 String _hashPassword(String password) {
   return sha256.convert(utf8.encode(password)).toString();
 }
